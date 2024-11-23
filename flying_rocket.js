@@ -47,7 +47,7 @@ function updateScreen() {
 function put(string, index, character) {
   let newString = '';
   
-  for (let i = 0; i < string.length; i++) {
+  for (let i = 0; i < string.length - 1; i++) {
     const charToAdd = Math.random() > 0.97 ? character : ' ';
 
     newString += string[i];
@@ -65,8 +65,10 @@ function getRandomNumber(from, to) {
 function stars() {
   console.clear();
 
-  topScreen = put(topScreen, getRandomNumber(0, WIDTH * HEIGHT / 2), '-');
-  bottomScreen = put(bottomScreen, getRandomNumber(0, WIDTH * HEIGHT / 2), '-');
+  const lastScreenIndex = WIDTH * HEIGHT / 2 - 1;
+
+  topScreen = put(topScreen, getRandomNumber(0, lastScreenIndex), '-');
+  bottomScreen = put(bottomScreen, getRandomNumber(0, lastScreenIndex), '-');
 
   updateScreen();
 }
