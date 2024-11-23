@@ -5,10 +5,15 @@ function repeat(string, times) {
   let newString = '';
   for (let i = 1; i <= times; i++) {
     newString += string;  
+
+    // if (i % WIDTH === 0) {
+    //   newString += '\n';
+    // }
   }
 
   return newString;
 }
+
 
 // console.log(screen);
 
@@ -32,9 +37,11 @@ function updateScreen() {
     console.log(slice(topScreen, counter * WIDTH, (counter + 1) * WIDTH));
   }
 
-  console.log(repeat(' ', (WIDTH / 2) - 10), '      /|    ');
-  console.log(repeat(' ', (WIDTH / 2) - 10), '<===========|');
-  console.log(repeat(' ', (WIDTH / 2) - 10), '      \\|     ');
+  offset += Math.random() > 0.5 ? -1 : 1;
+
+  console.log(repeat(' ', (WIDTH / 2) - 10 - offset), '      /|    ');
+  console.log(repeat(' ', (WIDTH / 2) - 10 - offset), '<=======| ~~');
+  console.log(repeat(' ', (WIDTH / 2) - 10 - offset), '      \\|    ');
 
   for (let counter = (HEIGHT / 2) - 1; counter >= 0; counter--) {
     console.log(slice(bottomScreen, counter * WIDTH, (counter + 1) * WIDTH));
@@ -45,7 +52,7 @@ function put(string, index, character) {
   let newString = '';
   
   for (let i = 0; i < string.length; i++) {
-    const charToAdd = Math.random() > 0.95 ? character : ' ';
+    const charToAdd = Math.random() > 0.975 ? character : ' ';
 
     newString += string[i];
 
@@ -73,6 +80,7 @@ function wait(delay) {
 }
 
 function animate() {
+  
   while(true) {
     wait(49999999);
     
@@ -82,6 +90,9 @@ function animate() {
 
 let topScreen = repeat(' ', WIDTH * HEIGHT / 2);
 let bottomScreen = repeat(' ', WIDTH * HEIGHT / 2);
+
+let offset = 0;
+// const rocket = '        /|\n' + '<===============|\n' + '        \\|';
 
 // screen = put(screen, 157, 'Q');
 
