@@ -5,17 +5,10 @@ function repeat(string, times) {
   let newString = '';
   for (let i = 1; i <= times; i++) {
     newString += string;  
-
-    // if (i % WIDTH === 0) {
-    //   newString += '\n';
-    // }
   }
 
   return newString;
 }
-
-
-// console.log(screen);
 
 function slice(string, from, to) {
   let newString = '';
@@ -29,19 +22,22 @@ function slice(string, from, to) {
 
 
 function updateScreen() {
+  const thrust = Math.random();
+  const thrustConstraint = 0.5001;
+
   for (let counter = 0; counter < HEIGHT / 2; counter++) {
-    // const screenSlice = slice(screen, counter * WIDTH, (counter + 1) * WIDTH);
-
-    // console.log(put(screenSlice, getRandomNumber(0, WIDTH), '.'));
-
     console.log(slice(topScreen, counter * WIDTH, (counter + 1) * WIDTH));
   }
 
-  offset += Math.random() > 0.5 ? -1 : 1;
+  offset += thrust > thrustConstraint ? 1 : -1;
 
-  console.log(repeat(' ', (WIDTH / 2) - 10 - offset), '      /|    ');
-  console.log(repeat(' ', (WIDTH / 2) - 10 - offset), '<=======| ~~');
-  console.log(repeat(' ', (WIDTH / 2) - 10 - offset), '      \\|    ');
+  const numberOfSpaces = (WIDTH / 2) - 10 - offset;
+
+  const thrusterExhaust = repeat('~', (thrust * 10) / 2);
+
+  console.log(repeat(' ', numberOfSpaces), '      /|    ');
+  console.log(repeat(' ', numberOfSpaces), '<=======| ' + thrusterExhaust);
+  console.log(repeat(' ', numberOfSpaces), '      \\|    ');
 
   for (let counter = (HEIGHT / 2) - 1; counter >= 0; counter--) {
     console.log(slice(bottomScreen, counter * WIDTH, (counter + 1) * WIDTH));
@@ -52,7 +48,7 @@ function put(string, index, character) {
   let newString = '';
   
   for (let i = 0; i < string.length; i++) {
-    const charToAdd = Math.random() > 0.975 ? character : ' ';
+    const charToAdd = Math.random() > 0.97 ? character : ' ';
 
     newString += string[i];
 
@@ -82,7 +78,7 @@ function wait(delay) {
 function animate() {
   
   while(true) {
-    wait(49999999);
+    wait(99999999);
     
     stars();
   }
@@ -92,10 +88,5 @@ let topScreen = repeat(' ', WIDTH * HEIGHT / 2);
 let bottomScreen = repeat(' ', WIDTH * HEIGHT / 2);
 
 let offset = 0;
-// const rocket = '        /|\n' + '<===============|\n' + '        \\|';
-
-// screen = put(screen, 157, 'Q');
-
-// updateScreen();
 
 animate()
